@@ -1,20 +1,22 @@
 import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
+import Nav from './components/Nav/Nav'
 
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router'
 import Home from './pages/Home'
 import Movies from './pages/Movies'
-import Nav from './components/Nav/Nav'
 import Search from './pages/Search'
 import Smartlist from './pages/Smartlist'
 import MyCart from './pages/MyCart'
 import QRcode from './pages/QRcode'
-import Login from './components/Login/Login'
-import Signup from './components/Login/Signup'
-import Member from './components/Login/Member'
+import Login from './Login/Login'
+import Signup from './Login/Signup'
+import Member from './Login/Member'
 
 function App() {
+  const location = useLocation();
+  const hideNavPaths = ["/", "/login", "/signup"];
 
   return (
     <BrowserRouter>
@@ -30,7 +32,7 @@ function App() {
         <Route path="/qrcode" element={<QRcode />} />
         <Route path="/movies" element={<Movies />} />
       </Routes>
-      <Nav />
+      {!hideNavPaths.includes(location.pathname) && <Nav />}
       <Footer />
     </BrowserRouter>
   )
