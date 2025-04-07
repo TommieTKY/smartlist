@@ -1,6 +1,6 @@
 export default function Nav() {
   return (
-      <nav className="navbar navbar-expand-sm bg-light fixed-bottom mb-5">
+    <nav className="navbar navbar-expand-sm bg-light fixed-bottom mb-5">
         <div className="container-fluid">
             <div className="navbar-nav ms-auto d-flex flex-row w-100 justify-content-around">
                 <a className="nav-link" href="/home">Home</a>              

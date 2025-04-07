@@ -9,12 +9,12 @@ import Movies from './pages/Movies'
 import Search from './pages/Search'
 import Smartlist from './pages/Smartlist'
 import MyCart from './pages/MyCart'
-import QRcode from './pages/QRcode'
+import QRcode from './QRcode/QRcode'
 import Login from './Login/Login'
 import Signup from './Login/Signup'
 import Member from './Login/Member'
-// import Calculator from './pages/Calculator'
-// import Preferences from './pages/Preferences'
+import SmartlistCalculator from './pages/SmartlistCalculator'
+import SmartlistPreferences from './pages/SmartlistPreferences'
 
 function App() {
   const location = useLocation();
@@ -33,8 +33,8 @@ function App() {
         <Route path="/mycart" element={<MyCart />} />
         <Route path="/qrcode" element={<QRcode />} />
         <Route path="/movies" element={<Movies />} />
-        {/* <Route path="/calculator" element={<Calculator />} /> */}
-        {/* <Route path="/preferences" element={<Preferences />} /> */}
+        <Route path="/calculator" element={<SmartlistCalculator />} />
+        <Route path="/preferences" element={<SmartlistPreferences />} />
       </Routes>
       {!hideNavPaths.includes(location.pathname) && <Nav />}
       <Footer />

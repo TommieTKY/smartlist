@@ -21,9 +21,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const isValidUser = userList.find(user => user.email === email && user.password === password);
     const isValidUser = userList.some(user => user.email === email && user.password === password);
-
 
     if (isValidUser) {
       navigate("/home");
