@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 function SmartlistPreferences({ onGenerate }) {
   const [budget, setBudget] = useState("");
@@ -29,6 +30,10 @@ function SmartlistPreferences({ onGenerate }) {
   const handleGenerate = () => {
     onGenerate({ budget, itemTypes, dietaryRestrictions });
   };
+
+  useEffect(() => {
+    document.title = "Smartlist | SmartList"
+  }, [])
 
   return (
     <>
