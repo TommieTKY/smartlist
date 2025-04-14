@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { BrowserMultiFormatReader } from "@zxing/browser";
 
 export default function QRcode() {
@@ -8,65 +8,81 @@ export default function QRcode() {
   const [popupVisible, setPopupVisible] = useState(false);
   const codeReaderRef = useRef(null); // to store the reader instance
 
-  useEffect(() => {
-    document.title = "QR Code | SmartList";
+  const startScanner = useCallback(async () => {
+    try {
+      // If there's no code reader instance yet, create one and store it in the ref.
+      if (!codeReaderRef.current) {
+        codeReaderRef.current = new BrowserMultiFormatReader();
+      }
+      
+      const videoInputDevices = await BrowserMultiFormatReader.listVideoInputDevices();
+      const selectedDeviceId = videoInputDevices[0]?.deviceId;
 
-    const codeReader = new BrowserMultiFormatReader();
+      if (!selectedDeviceId) {
+        console.error("No camera found");
+        return;
+      }
 
-    const startScanner = async () => {
-      try {
-        const videoInputDevices = await BrowserMultiFormatReader.listVideoInputDevices();
-        const selectedDeviceId = videoInputDevices[0]?.deviceId;
-
-        if (!selectedDeviceId) {
-          console.error("No camera found");
-          return;
-        }
-
-        codeReader.decodeFromVideoDevice(
-          selectedDeviceId,
-          videoRef.current,
-          (result, err) => {
-            if (result) {
-              const scannedurl = result.getText();
-              setQrResult(scannedurl);
-              console.log("QR Code Scanned:", scannedurl);
-              
-              if (scannedurl === "https://smartlist.com/redeem?pt=10") {
-                setPoints(prevPoints => prevPoints + 10);
-                setPopupVisible(true);
-                codeReader.reset();
-              }
-            }
-            if (err) {
-              console.error(err);
+      // Use the codeReaderRef instance
+      codeReaderRef.current.decodeFromVideoDevice(
+        selectedDeviceId,
+        videoRef.current,
+        (result, err) => {
+          if (result) {
+            const scannedurl = result.getText();
+            setQrResult(scannedurl);
+            console.log("QR Code Scanned:", scannedurl);
+            
+            if (scannedurl === "https://smartlist.com/redeem?pt=10") {
+              setPoints(prevPoints => prevPoints + 10);
+              setPopupVisible(true);
+              codeReaderRef.current.reset();
             }
           }
-        );
-      } catch (err) {
-        console.error("Camera error:", err);
-      }
-    };
+          if (err) {
+            console.error(err);
+          }
+        }
+      );
+    } catch (err) {
+      console.error("Camera error:", err);
+    }
+  }, []);
 
+  useEffect(() => {
+    document.title = "Scan | SmartList";
+
+    // Create the codeReader instance right away and store it in the ref.
+    if (!codeReaderRef.current) {
+      codeReaderRef.current = new BrowserMultiFormatReader();
+    }
     startScanner();
 
     return () => {
-      codeReader.reset(); // Clean up when component unmounts
+      if (codeReaderRef.current) {
+        codeReaderRef.current.reset(); // Clean up when component unmounts        
+      }
     };
-  }, []);
+  }, [startScanner]);
 
   const handlePopupClose = () => {
-  setPopupVisible(false);
-    // Optionally, you could restart the scanner here if you want to resume scanning
-    // For example, you might call startScanner() again (after refactoring it outside the useEffect).
+    setPopupVisible(false);
+    startScanner();
   };
 
   return (
-    <main className="text-center">
-      <h1>QR Code Scanner</h1>
-      <video ref={videoRef} width="300" height="200" autoPlay />
-      <p>Scanned QR Code: <strong>{qrResult}</strong></p>
-      <p>Available points: {points}</p>
+    <main className="container p-4 fs-4">
+      <div>
+        <a href="/point" className="text-dark">
+          <i className="bi bi-arrow-left"></i> Back
+        </a>
+      </div>
+      <div className="d-flex justify-content-center align-items-center mt-5 mb-4 border rounded">
+        <video ref={videoRef} width="250" height="500" autoPlay />
+      </div>
+      <div style={{ fontSize: "1.2rem" }} className="text-center mt-5">
+        <p>Use the camera to scan the shopping bag QR code to claim points!</p>
+      </div>
 
       {popupVisible && (
         <div
@@ -87,18 +103,31 @@ export default function QRcode() {
               backgroundColor: "#fff",
               padding: "20px",
               borderRadius: "8px",
-              textAlign: "center"
+              textAlign: "center",
+              position: "relative"
             }}
           >
-            <p>
-              You've earned 10pts! <br />
-              Scan more bags to earn more
-            </p>
-            <button onClick={handlePopupClose}>Done</button>
+            <i
+              className="bi bi-x-circle"
+              onClick={handlePopupClose}
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "15px",
+                fontSize: "1.5rem",
+                cursor: "pointer"
+              }}
+            ></i>
+            <div className="fs-1 mt-4">
+              You've earned <span className="text-success">10pts!</span>
+            </div>
+            <p className="fs-5">Scan more bags to earn more</p>
+            <button onClick={handlePopupClose} className="btn btn-success w-75">
+              Done
+            </button>
           </div>
         </div>
       )}
-
     </main>
   );
 }

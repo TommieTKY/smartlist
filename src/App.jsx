@@ -13,6 +13,7 @@ import Signup from './Login/Signup'
 import Member from './Login/Member'
 import SmartlistCalculator from './pages/SmartlistCalculator'
 import SmartlistPreferences from './pages/SmartlistPreferences'
+import Point from './QRcode/Point'
 
 function App() {
   const location = useLocation();
@@ -28,7 +29,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/search" element={<Search />} />
         <Route path="/mycart" element={<MyCart />} />
-        <Route path="/qrcode" element={<QRcode />} />
+        <Route path="/qrcode" element={<Point />} />
+        <Route path="/scan" element={<QRcode />} />
         <Route path="/calculator" element={<SmartlistCalculator />} />
         <Route path="/smartlist" element={<SmartlistPreferences />} />
       </Routes>

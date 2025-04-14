@@ -31,37 +31,47 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Welcome Back</h1>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="p-3">
+      <header className="display-inline">
+        <div>
+          <a href="/home" className="text-dark"><i className="bi bi-arrow-left"></i> Back</a>
         </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div className="text-center">
+          <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
         </div>
-        <div className="mb-3 text-end">
-          <a href="#">Forgot Password?</a>
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>
+      </header>
+      <main>
+        <h1>Welcome Back</h1>
+        {error && <div className="alert alert-danger">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3 text-end">
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        </main>
     </div>
   );
 }
