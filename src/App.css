@@ -1,3 +1,7 @@
+.page-bottom{
+  padding-bottom: 9rem;
+}
+
 /* Global styles */
 body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -52,12 +56,4 @@ button.btn-success:hover {
 
 .form-check-input {
   margin-right: 12px;
-}
-
-/* Back button link */
-button.btn-link {
-  color: #2e7d32;
-  text-decoration: none;
-  font-size: 16px;
-  padding-left: 0;
 }

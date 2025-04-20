@@ -20,18 +20,18 @@ function App() {
 
   return (
     <>
-      <main className="container pb-4">
+      <main className="container page-bottom">
         <Routes>
-          <Route path="/" element={<Member />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/mycart" element={<MyCart />} />
-          <Route path="/qrcode" element={<Point />} />
-          <Route path="/scan" element={<QRcode />} />
-          <Route path="/calculator" element={<SmartlistCalculator />} />
-          <Route path="/smartlist" element={<SmartlistPreferences />} />
+            <Route path="/" element={<Member />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/mycart" element={<MyCart />} />
+            <Route path="/qrcode" element={<Point />} />
+            <Route path="/scan" element={<QRcode />} />
+            <Route path="/calculator" element={<SmartlistCalculator />} />
+            <Route path="/smartlist" element={<SmartlistPreferences />} />
         </Routes>
         {!hideNavPaths.includes(location.pathname) && <Nav />}
       </main>

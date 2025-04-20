@@ -15,17 +15,19 @@ export default function QRcode() {
         codeReaderRef.current = new BrowserMultiFormatReader();
       }
       
-      const videoInputDevices = await BrowserMultiFormatReader.listVideoInputDevices();
-      const selectedDeviceId = videoInputDevices[0]?.deviceId;
+      // const videoInputDevices = await BrowserMultiFormatReader.listVideoInputDevices();
+      // const selectedDeviceId = videoInputDevices[0]?.deviceId;
 
-      if (!selectedDeviceId) {
-        console.error("No camera found");
-        return;
-      }
+
+      // if (!selectedDeviceId) {
+      //   console.error("No camera found");
+      //   return;
+      // }
 
       // Use the codeReaderRef instance
       codeReaderRef.current.decodeFromVideoDevice(
-        selectedDeviceId,
+        undefined,
+        // selectedDeviceId,
         videoRef.current,
         (result, err) => {
           if (result) {
