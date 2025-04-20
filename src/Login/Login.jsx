@@ -34,14 +34,26 @@ export default function Login() {
     <div className="p-3">
       <header className="display-inline">
         <div>
-          <a href="/home" className="text-dark"><i className="bi bi-arrow-left"></i> Back</a>
+          <a href="/" className="text-dark"><i className="bi bi-arrow-left"></i></a>
         </div>
         <div className="text-center">
           <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
         </div>
       </header>
+      {/* <header className="d-flex align-items-flex-start justify-content-between px-3 py-2">
+        <a href="/home" className="text-dark">
+          <i className="bi bi-arrow-left"></i>
+        </a>
+
+        <div className="flex-grow-1 text-center position-absolute w-100">
+          <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
+        </div>
+      </header> */}
+
       <main>
-        <h1>Welcome Back</h1>
+        <h1 className="fs-3 fw-bolder mt-4">Welcome Back</h1>
+        <p className="text-muted">Login with your registered email address to gain access.</p>
+
         {error && <div className="alert alert-danger">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -66,10 +78,10 @@ export default function Login() {
               required
             />
           </div>
-          <div className="mb-3 text-end">
-            <a href="#">Forgot Password?</a>
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <p className="mb-3 text-end">
+            <a className="link-success link-underline-success" href="#">Forgot Password?</a>
+          </p>
+          <button type="submit" className="btn btn-success w-100 fs-4 mt-5">Submit</button>
           </form>
         </main>
     </div>

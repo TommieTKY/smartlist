@@ -54,32 +54,6 @@ button.btn-success:hover {
   margin-right: 12px;
 }
 
-/* Bottom navigation bar */
-.bottom-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 56px;
-  background-color: #fff;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  max-width: 430px;
-  border-top: 1px solid #ddd;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-.nav-icon {
-  font-size: 22px;
-  color: #999;
-}
-
-.nav-icon.active {
-  color: #2e7d32;
-}
-
 /* Back button link */
 button.btn-link {
   color: #2e7d32;

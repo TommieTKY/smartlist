@@ -1,5 +1,4 @@
 import './App.css'
-import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Nav from './components/Nav/Nav'
 
@@ -21,21 +20,22 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Member />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/mycart" element={<MyCart />} />
-        <Route path="/qrcode" element={<Point />} />
-        <Route path="/scan" element={<QRcode />} />
-        <Route path="/calculator" element={<SmartlistCalculator />} />
-        <Route path="/smartlist" element={<SmartlistPreferences />} />
-      </Routes>
-      {!hideNavPaths.includes(location.pathname) && <Nav />}
-      <Footer />
+      <main className="container pb-4">
+        <Routes>
+          <Route path="/" element={<Member />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/mycart" element={<MyCart />} />
+          <Route path="/qrcode" element={<Point />} />
+          <Route path="/scan" element={<QRcode />} />
+          <Route path="/calculator" element={<SmartlistCalculator />} />
+          <Route path="/smartlist" element={<SmartlistPreferences />} />
+        </Routes>
+        {!hideNavPaths.includes(location.pathname) && <Nav />}
+      </main>
+      <Footer/>
     </>
   )
 }

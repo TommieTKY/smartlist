@@ -15,12 +15,23 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/home");
+    navigate("/");
   };
 
   return (
-    <div>
-      <h1>Welcome!</h1>
+    <div className="p-3">
+      <header className="display-inline">
+        <div>
+          <a href="/" className="text-dark"><i className="bi bi-arrow-left"></i></a>
+        </div>
+        <div className="text-center">
+          <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
+        </div>
+      </header>
+
+      <h1 className="fs-3 fw-bolder mt-4">Welcome!</h1>
+      <p className="text-muted">Fill in the informations below to gain access.</p>
+
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -76,14 +87,12 @@ export default function Signup() {
             required
           />
           <div id="passwordHelp" className="form-text">
-            <p>Use at least 8 characters long.</p>
-            <p>Include a number or special character.</p>
-            <p>Avoid common words like 'password' or '123456'</p>
+            <div className="text-muted">Use at least 8 characters long.</div>
+            <div className="text-muted">Include a number or special character.</div>
+            <div className="text-muted">Avoid common words like 'password' or '123456'</div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">
-          Sign Up
-        </button>
+        <button type="submit" className="btn btn-success w-100 fs-4 mt-5">Sign Up</button>
       </form>
     </div>
   );
