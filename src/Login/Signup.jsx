@@ -25,7 +25,7 @@ export default function Signup() {
           <a href="/" className="text-dark"><i className="bi bi-arrow-left"></i></a>
         </div>
         <div className="text-center">
-          <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
+          <img src="/logo.png" alt="Logo" style={{ width: "5rem" }} />
         </div>
       </header>
 

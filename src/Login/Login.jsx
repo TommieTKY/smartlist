@@ -37,19 +37,9 @@ export default function Login() {
           <a href="/" className="text-dark"><i className="bi bi-arrow-left"></i></a>
         </div>
         <div className="text-center">
-          <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
+          <img src="/logo.png" alt="Logo" style={{ width: "5rem" }} />
         </div>
       </header>
-      {/* <header className="d-flex align-items-flex-start justify-content-between px-3 py-2">
-        <a href="/home" className="text-dark">
-          <i className="bi bi-arrow-left"></i>
-        </a>
-
-        <div className="flex-grow-1 text-center position-absolute w-100">
-          <img src="src/assets/logo.png" alt="Logo" style={{ width: "5rem" }} />
-        </div>
-      </header> */}
-
       <main>
         <h1 className="fs-3 fw-bolder mt-4">Welcome Back</h1>
         <p className="text-muted">Login with your registered email address to gain access.</p>

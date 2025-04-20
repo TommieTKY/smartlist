@@ -73,7 +73,7 @@ export default function QRcode() {
   return (
     <main className="container p-4 fs-4">
       <div>
-        <a href="/point" className="text-dark">
+        <a href="/qrcode" className="text-dark">
           <i className="bi bi-arrow-left"></i> Back
         </a>
       </div>
