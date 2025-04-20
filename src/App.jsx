@@ -19,7 +19,7 @@ function App() {
   const hideNavPaths = ["/", "/login", "/signup"];
 
   return (
-    <BrowserRouter>
+    <>
       <main className="container pb-4">
         <Routes>
           <Route path="/" element={<Member />} />
@@ -36,7 +36,7 @@ function App() {
         {!hideNavPaths.includes(location.pathname) && <Nav />}
       </main>
       <Footer/>
-    </BrowserRouter>
+    </>
   )
 }
 
