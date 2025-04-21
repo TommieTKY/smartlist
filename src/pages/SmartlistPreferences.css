@@ -109,3 +109,11 @@
     background-color: #16a085;
   }
   
+  .green-btn {
+    background-color: #4CAF50;
+  }
+  
+  .green-btn:hover {
+    background-color: #43a047;
+  }
+  
