@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import "./Login.css";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -15,25 +16,25 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/");
+    navigate("/member");
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 mb-4">
       <header className="display-inline">
         <div>
-          <a href="/" className="text-dark"><i className="bi bi-arrow-left"></i></a>
+          <a href="/member" className="text-dark"><i className="bi bi-arrow-left"></i></a>
         </div>
         <div className="text-center">
           <img src="/logo.png" alt="Logo" style={{ width: "5rem" }} />
         </div>
       </header>
 
-      <h1 className="fs-3 fw-bolder mt-4">Welcome!</h1>
-      <p className="text-muted">Fill in the informations below to gain access.</p>
+      <h1 className="fs-4 fw-bolder mt-4">Welcome!</h1>
+      <p className="text-muted login-font">Fill in the informations below to gain access.</p>
 
       {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-font">
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Full Name
@@ -92,7 +93,7 @@ export default function Signup() {
             <div className="text-muted">Avoid common words like 'password' or '123456'</div>
           </div>
         </div>
-        <button type="submit" className="btn btn-success w-100 fs-4 mt-5">Sign Up</button>
+        <button type="submit" className="btn w-100 login-font mt-4 p-2 background-green">Sign Up</button>
       </form>
     </div>
   );

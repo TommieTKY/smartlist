@@ -14,8 +14,8 @@ export default function Home() {
     document.title = "Home | SmartList"
   }, [])
   return (
-    <>
-      <header className="d-flex justify-content-between align-items-center px-3 bg-light py-4">
+    <div className="page-bottom">
+      <header className="d-flex justify-content-between align-items-center px-3 py-4">
         <div className="d-flex align-items-center gap-2">
           <img src="/logo.png" alt="Logo" style={{ width: "2rem" }} />
           <p className="fs-3 mb-0">Smart List</p>
@@ -82,6 +82,6 @@ export default function Home() {
         <h2 className="fs-4 my-3"><strong>Deals</strong></h2>
         <img src={bestDeal} alt="Beast-Deal" className="img-fluid" style={{ width: "100%", maxWidth: "600px" }} />
       </main>
-    </>
+    </div>
   )
 }

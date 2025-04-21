@@ -1,13 +1,5 @@
 .page-bottom{
-  padding-bottom: 9rem;
-}
-
-/* Global styles */
-body {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background-color: #f8f9fa;
-  margin: 0;
-  padding: 0;
+  padding-bottom: 6rem;
 }
 
 /* Mobile wrapper layout */

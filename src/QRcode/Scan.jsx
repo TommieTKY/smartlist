@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { BrowserMultiFormatReader } from "@zxing/browser";
 
-export default function QRcode() {
+export default function Scan() {
   const videoRef = useRef(null);
   const [qrResult, setQrResult] = useState("");
   const [points, setPoints] = useState(0);
@@ -15,19 +15,9 @@ export default function QRcode() {
         codeReaderRef.current = new BrowserMultiFormatReader();
       }
       
-      // const videoInputDevices = await BrowserMultiFormatReader.listVideoInputDevices();
-      // const selectedDeviceId = videoInputDevices[0]?.deviceId;
-
-
-      // if (!selectedDeviceId) {
-      //   console.error("No camera found");
-      //   return;
-      // }
-
       // Use the codeReaderRef instance
       codeReaderRef.current.decodeFromVideoDevice(
         undefined,
-        // selectedDeviceId,
         videoRef.current,
         (result, err) => {
           if (result) {
@@ -73,16 +63,16 @@ export default function QRcode() {
   };
 
   return (
-    <main className="container p-4 fs-4">
+    <main className="container page-bottom point-font pt-4">
       <div>
-        <a href="/qrcode" className="text-dark">
+        <a href="/qrcode" className="text-dark text-decoration-none">
           <i className="bi bi-arrow-left"></i> Back
         </a>
       </div>
       <div className="d-flex justify-content-center align-items-center mt-5 mb-4 border rounded">
-        <video ref={videoRef} width="250" height="500" autoPlay />
+        <video ref={videoRef} width="250" height="300" autoPlay />
       </div>
-      <div style={{ fontSize: "1.2rem" }} className="text-center mt-5">
+      <div className="text-center mt-5">
         <p>Use the camera to scan the shopping bag QR code to claim points!</p>
       </div>
 
@@ -114,17 +104,16 @@ export default function QRcode() {
               onClick={handlePopupClose}
               style={{
                 position: "absolute",
-                top: "15px",
-                right: "15px",
-                fontSize: "1.5rem",
+                top: "0.5rem",
+                right: "0.5rem",
                 cursor: "pointer"
               }}
             ></i>
-            <div className="fs-1 mt-4">
-              You've earned <span className="text-success">10pts!</span>
+            <div className="fs-4 mt-5">
+              You've earned <span style={{color:"#4CAF50"}}>10pts!</span>
             </div>
-            <p className="fs-5">Scan more bags to earn more</p>
-            <button onClick={handlePopupClose} className="btn btn-success w-75">
+            <p className="m-1">Scan more bags to earn more</p>
+            <button onClick={handlePopupClose} className="btn background-green w-75 mt-4">
               Done
             </button>
           </div>

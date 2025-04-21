@@ -34,18 +34,18 @@ export default function Login() {
     <div className="p-3">
       <header className="display-inline">
         <div>
-          <a href="/" className="text-dark"><i className="bi bi-arrow-left"></i></a>
+          <a href="/member" className="text-dark"><i className="bi bi-arrow-left"></i></a>
         </div>
         <div className="text-center">
           <img src="/logo.png" alt="Logo" style={{ width: "5rem" }} />
         </div>
       </header>
       <main>
-        <h1 className="fs-3 fw-bolder mt-4">Welcome Back</h1>
-        <p className="text-muted">Login with your registered email address to gain access.</p>
+        <h1 className="fs-4 fw-bolder mt-4">Welcome Back</h1>
+        <p className="text-muted login-font">Login with your registered email address to gain access.</p>
 
         {error && <div className="alert alert-danger">{error}</div>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-font">
           <div className="mb-3">
             <label htmlFor="email" className="form-label">Email address</label>
             <input
@@ -71,7 +71,7 @@ export default function Login() {
           <p className="mb-3 text-end">
             <a className="link-success link-underline-success" href="#">Forgot Password?</a>
           </p>
-          <button type="submit" className="btn btn-success w-100 fs-4 mt-5">Submit</button>
+          <button type="submit" className="btn w-100 mt-5 login-font background-green p-2">Login</button>
           </form>
         </main>
     </div>
