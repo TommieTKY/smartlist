@@ -1,156 +1,135 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import "./SmartlistPreferences.css";
 
-function SmartlistPreferences({ onGenerate }) {
-  const [budget, setBudget] = useState("");
+export default function SmartlistPreferences() {
+  const [amount, setAmount] = useState("");
   const [itemTypes, setItemTypes] = useState({
-    essentials: true,
+    essentials: false,
     mealBased: false,
-    bulkSavings: false
+    bulk: false,
   });
-
-  const [dietaryRestrictions, setDietaryRestrictions] = useState({
+  const [restrictions, setRestrictions] = useState({
     vegan: false,
     glutenFree: false,
     allergens: false,
-    lactose: false
+    lactoseIntolerant: false,
   });
+  const [notes, setNotes] = useState("");
 
-  const handleItemTypeChange = (type) => {
-    setItemTypes({ ...itemTypes, [type]: !itemTypes[type] });
-  };
+  const navigate = useNavigate();
 
-  const handleDietaryChange = (restriction) => {
-    setDietaryRestrictions({
-      ...dietaryRestrictions,
-      [restriction]: !dietaryRestrictions[restriction]
-    });
-  };
+  function handleItemTypeChange(e) {
+    const { name, checked } = e.target;
+    setItemTypes({ ...itemTypes, [name]: checked });
+  }
 
-  const handleGenerate = () => {
-    onGenerate({ budget, itemTypes, dietaryRestrictions });
-  };
+  function handleRestrictionChange(e) {
+    const { name, checked } = e.target;
+    setRestrictions({ ...restrictions, [name]: checked });
+  }
 
-  useEffect(() => {
-    document.title = "Smartlist | SmartList"
-  }, [])
+  function handleSubmit(e) {
+    e.preventDefault();
+    navigate("/calculator");
+  }
 
   return (
-    <>
-      <div className="mobile-wrapper pb-5">
-        <h5>Smart shopping list</h5>
+    <div className="preferences-container">
+      <button className="back-btn">← Back</button>
+      <h1 className="section-title">Smart shopping list</h1>
 
-        <div className="mb-3">
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Enter your grocery budget"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-          />
-        </div>
+      <form className="preferences-form" onSubmit={handleSubmit}>
+        <input
+          className="amount-input"
+          type="number"
+          placeholder="Input Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
 
-        <h6>Item type</h6>
-        <div className="form-check mb-2">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="essentials"
-            checked={itemTypes.essentials}
-            onChange={() => handleItemTypeChange("essentials")}
-          />
-          <label className="form-check-label" htmlFor="essentials">
+        <h2>Select Item type</h2>
+        <div className="option-buttons">
+          <label className={`option ${itemTypes.essentials ? "selected" : ""}`}>
+            <input
+              type="checkbox"
+              name="essentials"
+              checked={itemTypes.essentials}
+              onChange={handleItemTypeChange}
+            />
             Essentials only (Rice, Milk, Bread)
           </label>
-        </div>
-        <div className="form-check mb-2">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="mealBased"
-            checked={itemTypes.mealBased}
-            onChange={() => handleItemTypeChange("mealBased")}
-          />
-          <label className="form-check-label" htmlFor="mealBased">
+          <label className={`option ${itemTypes.mealBased ? "selected" : ""}`}>
+            <input
+              type="checkbox"
+              name="mealBased"
+              checked={itemTypes.mealBased}
+              onChange={handleItemTypeChange}
+            />
             Meal Based (Planned Meals)
           </label>
-        </div>
-        <div className="form-check mb-3">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="bulkSavings"
-            checked={itemTypes.bulkSavings}
-            onChange={() => handleItemTypeChange("bulkSavings")}
-          />
-          <label className="form-check-label" htmlFor="bulkSavings">
+          <label className={`option ${itemTypes.bulk ? "selected" : ""}`}>
+            <input
+              type="checkbox"
+              name="bulk"
+              checked={itemTypes.bulk}
+              onChange={handleItemTypeChange}
+            />
             Bulk Savings (Discounted items)
           </label>
         </div>
 
-        <h6>Dietary Restrictions</h6>
-        <div className="row mb-3">
-          <div className="col-6">
-            <div className="form-check mb-2">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="vegan"
-                checked={dietaryRestrictions.vegan}
-                onChange={() => handleDietaryChange("vegan")}
-              />
-              <label className="form-check-label" htmlFor="vegan">Vegan</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="allergens"
-                checked={dietaryRestrictions.allergens}
-                onChange={() => handleDietaryChange("allergens")}
-              />
-              <label className="form-check-label" htmlFor="allergens">Allergens</label>
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="form-check mb-2">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="glutenFree"
-                checked={dietaryRestrictions.glutenFree}
-                onChange={() => handleDietaryChange("glutenFree")}
-              />
-              <label className="form-check-label" htmlFor="glutenFree">Gluten-Free</label>
-            </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="lactose"
-                checked={dietaryRestrictions.lactose}
-                onChange={() => handleDietaryChange("lactose")}
-              />
-              <label className="form-check-label" htmlFor="lactose">Lactose Intolerant</label>
-            </div>
-          </div>
+        <h2>Dietary Restrictions</h2>
+        <div className="checkbox-grid">
+          <label>
+            <input
+              type="checkbox"
+              name="vegan"
+              checked={restrictions.vegan}
+              onChange={handleRestrictionChange}
+            />
+            Vegan
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="glutenFree"
+              checked={restrictions.glutenFree}
+              onChange={handleRestrictionChange}
+            />
+            Gluten-Free
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="allergens"
+              checked={restrictions.allergens}
+              onChange={handleRestrictionChange}
+            />
+            Allergens
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="lactoseIntolerant"
+              checked={restrictions.lactoseIntolerant}
+              onChange={handleRestrictionChange}
+            />
+            Lactose Intolerant
+          </label>
         </div>
 
-        <button className="btn btn-success w-100" onClick={handleGenerate}>
+        <h2>Additional Information</h2>
+        <textarea
+          placeholder="I need items with proteins..."
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+        />
+
+        <button type="submit" className="generate-button">
           Generate List
         </button>
-      </div>
-
-      {/* Bottom Navigation Bar */}
-      <div className="bottom-nav">
-        <div className="nav-icon">🏠</div>
-        <div className="nav-icon">🔍</div>
-        <div className="nav-icon active">📋</div>
-        <div className="nav-icon">🛒</div>
-        <div className="nav-icon">🔲</div>
-      </div>
-    </>
+      </form>
+    </div>
   );
 }
-
-export default SmartlistPreferences;

@@ -1,96 +1,122 @@
 import React, { useState } from "react";
+import "./SmartlistCalculator.css";
 
-function SmartlistCalculator({ onBack }) {
-  const [products, setProducts] = useState([
-    { name: "White bread", quantity: 1, price: 2.5, stock: "In stock" },
-    { name: "Brown Rice", quantity: 3, price: 1.8, stock: "Limited stock" },
-    { name: "Milk", quantity: 2, price: 1.5, stock: "Out of stock" },
-    { name: "Eggs", quantity: 10, price: 0.2, stock: "In stock" }
-  ]);
+const initialItems = [
+  {
+    id: 1,
+    name: "White bread",
+    price: 3.89,
+    image: "/images/bread.jpeg",
+    quantity: 1,
+    stock: "In stock",
+    stockColor: "green",
+  },
+  {
+    id: 2,
+    name: "Brown Rice",
+    price: 3.89,
+    image: "/images/rice.jpeg",
+    quantity: 3,
+    stock: "Limited stock",
+    stockColor: "orange",
+  },
+  {
+    id: 3,
+    name: "Milk",
+    price: 5.89,
+    image: "/images/milk.jpeg",
+    quantity: 1,
+    stock: "Out of stock",
+    stockColor: "red",
+  },
+  {
+    id: 4,
+    name: "Eggs",
+    price: 2.89,
+    image: "/images/eggs.jpeg",
+    quantity: 5,
+    stock: "In stock",
+    stockColor: "green",
+  },
+];
 
-  const totalBudget = 20;
-  const usedBudget = products.reduce((sum, item) => sum + item.quantity * item.price, 0);
+export default function SmartlistCalculator() {
+  const [items, setItems] = useState(initialItems);
+  const [showPopup, setShowPopup] = useState(false);
+  const budget = 200;
 
-  const handleQuantityChange = (name, change) => {
-    setProducts((prev) =>
+  const totalUsed = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  function updateQuantity(id, delta) {
+    setItems((prev) =>
       prev.map((item) =>
-        item.name === name
-          ? { ...item, quantity: Math.max(0, item.quantity + change) }
+        item.id === id
+          ? { ...item, quantity: Math.max(item.quantity + delta, 0) }
           : item
       )
     );
-  };
+  }
 
-  const getStockColor = (status) => {
-    if (status === "In stock") return "text-success";
-    if (status === "Limited stock") return "text-warning";
-    return "text-danger";
-  };
+  function handleAddToCart() {
+    setShowPopup(true);
+  }
+
+  function closePopup() {
+    setShowPopup(false);
+  }
 
   return (
-    <>
-      <div className="mobile-wrapper pb-5">
-        <button className="btn btn-link mb-3" onClick={onBack}>
-          ← Back
-        </button>
+    <div className="calculator-container">
+      <button className="back-btn">← Back</button>
+      <h1 className="section-title">Budget used</h1>
 
-        <h6>Budget used</h6>
-        <div className="progress mb-2">
-          <div
-            className="progress-bar bg-success"
-            role="progressbar"
-            style={{ width: `${(usedBudget / totalBudget) * 100}%` }}
-            aria-valuenow={(usedBudget / totalBudget) * 100}
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-        <p>${usedBudget.toFixed(2)} of ${totalBudget.toFixed(2)} used</p>
+      <div className="budget-bar">
+        <div
+          className="budget-fill"
+          style={{ width: `${(totalUsed / budget) * 100}%` }}
+        ></div>
+      </div>
+      <p className="budget-label">${totalUsed.toFixed(2)} of ${budget} used</p>
 
-        <h6>Suggestions</h6>
-        <div className="row">
-          {products.map((item, index) => (
-            <div className="col-6 mb-3" key={index}>
-              <div className="card text-center h-100">
-                <div className="card-body">
-                  <h6 className="card-title">{item.name}</h6>
-                  <div className="d-flex justify-content-center align-items-center mb-2">
-                    <button
-                      className="btn btn-light btn-sm rounded-circle"
-                      onClick={() => handleQuantityChange(item.name, -1)}
-                    >
-                      –
-                    </button>
-                    <span className="mx-2">{item.quantity}</span>
-                    <button
-                      className="btn btn-light btn-sm rounded-circle"
-                      onClick={() => handleQuantityChange(item.name, 1)}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <p>${item.price.toFixed(2)}</p>
-                  <p className={getStockColor(item.stock)}>{item.stock}</p>
-                </div>
-              </div>
+      <h2 className="section-title">Suggestions</h2>
+      <div className="product-grid">
+        {items.map((item) => (
+          <div className="product-card" key={item.id}>
+            <img src={item.image} alt={item.name} />
+            <div className="product-name">{item.name}</div>
+            <div className="qty-row">
+              <button onClick={() => updateQuantity(item.id, -1)}>−</button>
+              <span>{item.quantity}</span>
+              <button onClick={() => updateQuantity(item.id, 1)}>+</button>
             </div>
-          ))}
+            <div className="price">${item.price.toFixed(2)}</div>
+            <div className="stock">
+              <span className={`dot ${item.stockColor}`}></span>
+              {item.stock}
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="text-center mt-4">
+        <button className="add-cart-btn text-center" onClick={handleAddToCart}>
+          Add to cart
+        </button>
+      </div>
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-box">
+            <button className="close-btn" onClick={closePopup}>×</button>
+            <div className="popup-checkmark">✔</div>
+            <div className="popup-message">Added to Cart!</div>
+            <button className="view-cart-btn">View Cart</button>
+          </div>
         </div>
-
-        <button className="btn btn-success w-100 mt-3">Add to cart</button>
-      </div>
-
-      {/* Bottom Navigation Bar */}
-      <div className="bottom-nav">
-        <div className="nav-icon">🏠</div>
-        <div className="nav-icon">🔍</div>
-        <div className="nav-icon active">📋</div>
-        <div className="nav-icon">🛒</div>
-        <div className="nav-icon">🔲</div>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
-
-export default SmartlistCalculator;
-
