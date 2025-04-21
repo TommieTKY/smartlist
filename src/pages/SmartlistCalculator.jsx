@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import "./SmartlistCalculator.css";
 
 const initialItems = [
@@ -44,6 +45,7 @@ export default function SmartlistCalculator() {
   const [items, setItems] = useState(initialItems);
   const [showPopup, setShowPopup] = useState(false);
   const budget = 200;
+  const navigate = useNavigate();
 
   const totalUsed = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -70,7 +72,7 @@ export default function SmartlistCalculator() {
 
   return (
     <div className="calculator-container">
-      <button className="back-btn">← Back</button>
+      <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
       <h1 className="section-title">Budget used</h1>
 
       <div className="budget-bar">
@@ -100,9 +102,9 @@ export default function SmartlistCalculator() {
           </div>
         ))}
       </div>
-      
+
       <div className="text-center mt-4">
-        <button className="add-cart-btn text-center" onClick={handleAddToCart}>
+        <button className="add-cart-btn text-center w-100" onClick={handleAddToCart}>
           Add to cart
         </button>
       </div>
@@ -113,7 +115,7 @@ export default function SmartlistCalculator() {
             <button className="close-btn" onClick={closePopup}>×</button>
             <div className="popup-checkmark">✔</div>
             <div className="popup-message">Added to Cart!</div>
-            <button className="view-cart-btn">View Cart</button>
+            <button className="view-cart-btn green-btn" onClick={() => navigate("/mycart")}>View Cart</button>
           </div>
         </div>
       )}

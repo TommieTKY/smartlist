@@ -36,7 +36,7 @@ export default function SmartlistPreferences() {
 
   return (
     <div className="preferences-container">
-      <button className="back-btn">← Back</button>
+      <button className="back-btn" onClick={() => navigate("/home")}>← Back</button>
       <h1 className="section-title">Smart shopping list</h1>
 
       <form className="preferences-form" onSubmit={handleSubmit}>

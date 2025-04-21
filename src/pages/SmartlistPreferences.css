@@ -1,110 +1,118 @@
 .preferences-container {
-    padding: 24px 16px 90px;
-    max-width: 480px;
-    margin: 0 auto;
-    font-family: "Segoe UI", sans-serif;
-  }
-  
-  .back-btn {
-    font-size: 16px;
-    margin-bottom: 12px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #333;
-  }
-  
-  .section-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 12px;
-  }
-  
-  .preferences-form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  .amount-input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
-    width: 100%;
-  }
-  
-  h2 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  
-  .option-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .option {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 15px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #fff;
-    transition: 0.2s;
-  }
-  
-  .option input {
-    transform: scale(1.1);
-  }
-  
-  .option.selected {
-    border: 2px solid #1abc9c;
-    background-color: #f1fdfb;
-  }
-  
-  .checkbox-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  
-  .checkbox-grid label {
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 12px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    resize: none;
-    height: 100px;
-  }
-  
-  .generate-button {
-    background-color: #1abc9c;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    margin-top: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .generate-button:hover {
-    background-color: #16a085;
-  }
-  
+  padding: 24px 16px 90px;
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.back-btn {
+  font-size: 16px;
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.preferences-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.amount-input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.option-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  transition: 0.2s;
+}
+
+.option input {
+  transform: scale(1.1);
+}
+
+.option.selected {
+  border: 2px solid #1abc9c;
+  background-color: #f1fdfb;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.checkbox-grid label {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  resize: none;
+  height: 100px;
+}
+
+.generate-button {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.generate-button:hover {
+  background-color: #16a085;
+}
+
+.green-btn {
+  background-color: #4CAF50;
+}
+
+.green-btn:hover {
+  background-color: #43a047;
+}
