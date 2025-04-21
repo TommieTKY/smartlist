@@ -1,19 +1,23 @@
-import { useEffect } from "react"
+import { useEffect, useState  } from "react"
 import memberQRcode from "../assets/QRcode/qrcode_2234-4356.png"
 
 export default function Point() {
+  const [points, setPoints] = useState(10000);
+
   useEffect(() => {
     document.title = "Point | SmartList";
+    const stored = parseInt(localStorage.getItem("points") || "10000", 10);
+    setPoints(stored);
   }, []);
 
   return (
     <main className="container point-font page-bottom pt-4">
       <div>
         <a href="/home" className="text-dark text-decoration-none"><i className="bi bi-arrow-left "></i> Back</a>
-      </div>
+      </div>  
       <div className="d-flex justify-content-between align-items-center my-4 p-3 border rounded">
             <span>Available points</span>
-            <span>10,000pts</span>
+            <span>{points.toLocaleString()} pts</span>
       </div>
       <div className="d-flex flex-column justify-content-center align-items-center gap-2">
             <span>Reward Number</span>

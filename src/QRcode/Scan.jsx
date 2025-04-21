@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { BrowserMultiFormatReader } from "@zxing/browser";
+import { useNavigate } from "react-router";
 
 export default function Scan() {
   const videoRef = useRef(null);
@@ -7,6 +8,7 @@ export default function Scan() {
   const [points, setPoints] = useState(0);
   const [popupVisible, setPopupVisible] = useState(false);
   const codeReaderRef = useRef(null); // to store the reader instance
+  const navigate = useNavigate();   
 
   const startScanner = useCallback(async () => {
     try {
@@ -26,7 +28,10 @@ export default function Scan() {
             console.log("QR Code Scanned:", scannedurl);
             
             if (scannedurl === "https://smartlist.com/redeem?pt=10") {
-              setPoints(prevPoints => prevPoints + 10);
+              const prev = parseInt(localStorage.getItem("points") || "10000", 10);
+              const next = prev + 10;
+              setPoints(next);
+              localStorage.setItem("points", next);
               setPopupVisible(true);
               codeReaderRef.current.reset();
             }
@@ -60,6 +65,7 @@ export default function Scan() {
   const handlePopupClose = () => {
     setPopupVisible(false);
     startScanner();
+    // navigate("/qrcode");
   };
 
   return (
